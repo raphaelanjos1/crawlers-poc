@@ -5,14 +5,15 @@ import { CrawlerService } from './crawler.service';
 export class CrawlerController {
   constructor(private readonly crawlerService: CrawlerService) {}
 
-  // Get /crawl para iniciar
   @Get()
   async crawl() {
-    const products = await this.crawlerService.crawl();
+    const { products, skus } = await this.crawlerService.crawl();
     return {
       message: 'Crawling concluído',
-      count: products.length,
+      productCount: products.length,
+      skuCount: skus.length,
       products,
+      skus,
     };
   }
 }
